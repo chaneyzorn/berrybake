@@ -49,7 +49,7 @@ function part_sdcard() {
     echo "mkfs.ext4 on ${SD_CARD}2"
     mkfs.ext4 -F ${SD_CARD}2
 
-    sleep 3 && sync
+    sync;sync;sync
 }
 
 function write_image(){
@@ -69,7 +69,7 @@ function write_image(){
     sed -i 's/mmcblk0/mmcblk1/g' rootfs/etc/fstab
 
     echo "Sync content to ${SD_CARD} ..."
-    sleep 3 && sync
+    sync;sync;sync
 }
 
 function add_preconfig() {
@@ -100,7 +100,7 @@ function add_preconfig() {
     chown -R root:root rootfs/etc/pacman.d/mirrorlist
 
     echo "Sync content to ${SD_CARD} ..."
-    sleep 3 && sync
+    sync;sync;sync
 }
 
 
@@ -120,11 +120,11 @@ function chroot_setup() {
 
     # sleep infinity  # for debug
 
-    echo "Config pi evn ..."
+    echo "Config pi env ..."
     arch-chroot rootfs /root/config_pi.sh
 
     echo "Sync content to ${SD_CARD} ..."
-    sleep 3 && sync
+    sync;sync;sync
 
     echo "Umount boot and rootfs"
     umount -l rootfs/boot rootfs/secret
