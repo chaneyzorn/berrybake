@@ -56,6 +56,9 @@ pacman -Sy
 pacman -S --noconfirm base-devel wget curl git man-db \
 clash proxychains sudo vim neovim rsync htop avahi nss-mdns docker prometheus-node-exporter
 
+# https://archlinuxarm.org/forum/viewtopic.php?f=65&t=15994#p69312
+pacman -S --noconfirm linux-rpi
+
 echo "Set sudoers for $NEW_USER"
 cat > /etc/sudoers.d/$NEW_USER << EOF
 $NEW_USER ALL=(ALL) ALL

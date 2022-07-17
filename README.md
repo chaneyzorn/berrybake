@@ -24,6 +24,12 @@
 
 另外，chroot 环境中没有实际对应的 systemd 服务，因此只能手工生成启动服务的链接，无法使用 `systemctl enable <service>` 命令。
 
+BCM2711 Stepping C0 无法使用 aarch64 镜像中的 uboot 正常启动,使用 `pacman -S linux-rpi` 安装上游内核后解决：
+
+- ["error -5 whilst initializing SD card"@20220315 aarch64 img](https://archlinuxarm.org/forum/viewtopic.php?f=65&t=15994#p69312)
+- [raspberry-pi-4-model-bs-arriving-newer-c0-stepping](https://www.jeffgeerling.com/blog/2021/raspberry-pi-4-model-bs-arriving-newer-c0-stepping)
+- [Raspberry Pi 4 Model B 8 GB (2/3 Fail with SD Card error)](https://archlinuxarm.org/forum/viewtopic.php?f=67&t=15422&start=20#p67299)
+
 ## rpifand 风扇控制守护进程
 
 rpifand 实现 GPIO PWM 风扇控制参考了以下资料：
