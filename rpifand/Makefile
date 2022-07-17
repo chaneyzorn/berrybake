@@ -1,21 +1,19 @@
-.PHONY: clean dist pkg
+.PHONY: clean bins dist pkg_aarch64
 
 clean:
-	rm -rf dist/bin
-	rm -rf pkg/rpifand*
-	rm -rf pkg/pkg
-	rm -rf pkg/src
+	rm -rf dist/aarch64
+	rm -rf pkg/aarch64/rpifand*
+	rm -rf pkg/aarch64/pkg
+	rm -rf pkg/aarch64/src
 
-rpifand: clean
-	mkdir -p dist/bin
+bins: clean
+	mkdir -p dist/aarch64/
 	# https://github.com/golang/go/wiki/GoArm
-	env GOOS=linux GOARCH=arm GOARM=7 \
-	go build -buildmode=pie -trimpath -mod=readonly -modcacherw \
-	-ldflags="-linkmode=external -extldflags=-Wl,-z,relro,-z,now" \
-	-o dist/bin/rpifand cmd/rpifand/main.go
+	env GOOS=linux GOARCH=arm64 \
+	go build -trimpath -o dist/aarch64/rpifand cmd/rpifand/main.go
 
-dist: rpifand
-	tar -czvf pkg/rpifand.tar.gz dist/
+dist: bins
+	tar -czvf pkg/aarch64/rpifand.tar.gz dist/
 
-pkg: dist
-	pushd pkg && makepkg -Cc && popd
+pkg_aarch64: dist
+	pushd pkg/aarch64 && CARCH=aarch64 makepkg -Cc && popd

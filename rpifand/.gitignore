@@ -1,5 +1,5 @@
 vendor/
-distor/bin
-pkg/pkg
-pkg/src
-pkg/rpifand*
+dist/aarch64/
+pkg/aarch64/pkg
+pkg/aarch64/src
+pkg/aarch64/rpifand*
