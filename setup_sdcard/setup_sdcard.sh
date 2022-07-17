@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Switch to root before execute this script
+# Switch to root before executing this script
 # Do **NOT** using `sudo` with this script
 
 set -e
@@ -16,6 +16,11 @@ PI_HOST_NAME="$(basename $MY_HOME)-pi$INDEX"
 
 if [[ ! -b $SD_CARD ]]; then
     echo "Usage: $0 <path/to/sdcard> <pi-num>"
+    exit 1
+fi
+
+if [[ $USER != "root"  ]]; then
+    echo "Current user is $USER, Please switch to root before executing this script"
     exit 1
 fi
 
