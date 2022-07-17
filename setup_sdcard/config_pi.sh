@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NEW_USER=chaney
+NEW_USER=young
 
 echo "Remove alarm user"
 userdel -r alarm
@@ -15,13 +15,13 @@ useradd -p $(cat /secret/passwd.sha512) -m $NEW_USER
 gpasswd -a $NEW_USER wheel
 
 cp -r /root/.ssh /home/$NEW_USER/
-cp /home/$NEW_USER/.ssh/id_rsa.pub /home/$NEW_USER/.ssh/authorized_keys
+cp /home/$NEW_USER/.ssh/id_*.pub /home/$NEW_USER/.ssh/authorized_keys
 chown -R $NEW_USER:$NEW_USER /home/$NEW_USER/.ssh
 
-echo "Setup clash config"
-mkdir -p /home/$NEW_USER/.config
-cp -r /secret/clash /home/$NEW_USER/.config/
-chown -R $NEW_USER:$NEW_USER /home/$NEW_USER/.config
+# echo "Setup clash config"
+# mkdir -p /home/$NEW_USER/.config
+# cp -r /secret/clash /home/$NEW_USER/.config/
+# chown -R $NEW_USER:$NEW_USER /home/$NEW_USER/.config
 
 echo "Setup wpa_supplicant for wlan0"
 cp -f  /secret/wpa_supplicant-wlan0.conf /etc/wpa_supplicant/
@@ -52,7 +52,7 @@ pacman-key --populate archlinuxarm
 # pacman -Syu --noconfirm
 pacman -Sy
 pacman -S --noconfirm base-devel wget curl git man-db \
-clash proxychains sudo vim neovim rsync htop avahi nss-mdns prometheus-node-exporter
+clash proxychains sudo vim neovim rsync htop avahi nss-mdns docker prometheus-node-exporter
 
 echo "Set sudoers for $NEW_USER"
 cat > /etc/sudoers.d/$NEW_USER << EOF
