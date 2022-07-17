@@ -24,6 +24,8 @@ chown -R $NEW_USER:$NEW_USER /home/$NEW_USER/.ssh
 # chown -R $NEW_USER:$NEW_USER /home/$NEW_USER/.config
 
 echo "Setup wpa_supplicant for wlan0"
+# see https://wiki.archlinux.org/title/Wpa_supplicant#Connecting_with_wpa_passphrase
+# wpa_passphrase <MYSSID> <passphrase>
 cp -f  /secret/wpa_supplicant-wlan0.conf /etc/wpa_supplicant/
 chown -R root:root /etc/wpa_supplicant/
 

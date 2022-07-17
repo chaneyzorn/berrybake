@@ -66,6 +66,8 @@ function write_image(){
     echo "Copy boot files to boot/ ..."
     mv rootfs/boot/* boot
 
+    sed -i 's/mmcblk0/mmcblk1/g' rootfs/etc/fstab
+
     echo "Sync content to ${SD_CARD} ..."
     sleep 3 && sync
 }
