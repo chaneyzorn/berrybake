@@ -1,0 +1,6 @@
+#
+# Arch Linux ARM repository mirrorlist
+#
+
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxarm/$arch/$repo
+

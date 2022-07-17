@@ -1,0 +1,19 @@
+# Maintainer: Chaney Zorn <chaneyzorn@gmail.com>
+pkgname=rpifand
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="GPIO PWM Fan Daemon for Raspberry Pi 4."
+url="https://github.com/chaneyzorn"
+license=('GPL')
+arch=('armv7h')
+makedepends=('go')
+source=("$pkgname.tar.gz")
+sha256sums=(SKIP)
+
+package() {
+    depends=('glibc')
+
+    install -Dm755 "$srcdir/dist/bin/rpifand" "$pkgdir/usr/bin/rpifand"
+    install -Dm644 "$srcdir/dist/rpifand.toml" "$pkgdir/etc/rpifand/rpifand.toml"
+    install -Dm644 "$srcdir/dist/rpifand.service" "$pkgdir/usr/lib/systemd/system/rpifand.service"
+}

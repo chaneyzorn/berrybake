@@ -1,0 +1,10 @@
+[Unit]
+Description=GPIO PWM Fan Daemon for Raspberry Pi 4
+
+[Service]
+ExecStart=/usr/bin/rpifand
+Restart=always
+MemoryMax=100M
+
+[Install]
+WantedBy=multi-user.target

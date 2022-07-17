@@ -1,0 +1,5 @@
+vendor/
+distor/bin
+pkg/pkg
+pkg/src
+pkg/rpifand*

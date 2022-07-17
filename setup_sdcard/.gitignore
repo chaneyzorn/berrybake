@@ -1,0 +1,6 @@
+ArchLinuxARM*.tar.gz
+yay*.tar.gz
+boot/
+rootfs/
+secret/
+extra/yay

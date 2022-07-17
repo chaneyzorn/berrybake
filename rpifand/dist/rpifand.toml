@@ -1,0 +1,27 @@
+[MAIN]
+gpio_pin = 18
+mode = "ONOFF"
+thermal_interval_seconds = 10
+tail_range = 18
+
+[ONOFF]
+temp_threshold_celsius = 45
+
+[PWM]
+temp_celsius_lv0 = 25
+fan_spped_lv0 = 0
+
+temp_celsius_lv1 = 30
+fan_spped_lv1 = 20
+
+temp_celsius_lv2 = 35
+fan_spped_lv2 = 40
+
+temp_celsius_lv3 = 40
+fan_spped_lv3 = 60
+
+temp_celsius_lv4 = 45
+fan_spped_lv4 = 80
+
+temp_celsius_lv5 = 50
+fan_spped_lv5 = 100
