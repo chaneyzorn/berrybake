@@ -7,12 +7,12 @@ set -e
 
 SD_CARD=$1
 INDEX=$2
-ROOTFS_TAR="ArchLinuxARM-rpi-4-latest.tar.gz"
-MY_HOME="/home/chaney"
+ROOTFS_TAR="ArchLinuxARM-rpi-aarch64-latest.tar.gz"
+MY_HOME="/home/young"
 PI_HOST_NAME="$(basename $MY_HOME)-pi$INDEX"
 
 # see https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
-# wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-4-latest.tar.gz
+# wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz
 
 if [[ ! -b $SD_CARD ]]; then
     echo "Usage: $0 <path/to/sdcard> <pi-num>"
@@ -53,10 +53,6 @@ function part_sdcard() {
 }
 
 function write_image(){
-    echo "mkdir boot & rootfs"
-    mkdir boot
-    mkdir rootfs
-
     echo "Mount ${SD_CARD}1 at boot/"
     mkdir -p boot
     mount ${SD_CARD}1 boot
@@ -81,7 +77,6 @@ function add_preconfig() {
     cp -rf ${MY_HOME}/.ssh rootfs/root/
 
     cp -RPf extra/multi-user.target.wants rootfs/etc/systemd/system/
-    cp -f extra/yay rootfs/usr/bin/yay
     cp -f extra/locale.gen rootfs/etc/locale.gen
     cp -f extra/nsswitch.conf rootfs/etc/nsswitch.conf
     cp -f extra/proxychains.conf rootfs/etc/proxychains.conf
@@ -95,7 +90,6 @@ function add_preconfig() {
 
     chown -R root:root rootfs/root/
     chown -R root:root rootfs/etc/systemd/system/
-    chown -R root:root rootfs/usr/bin/yay
     chown -R root:root rootfs/etc/hostname
     chown -R root:root rootfs/etc/locale.gen
     chown -R root:root rootfs/etc/nsswitch.conf
@@ -127,10 +121,13 @@ function chroot_setup() {
     echo "Config pi evn ..."
     arch-chroot rootfs /root/config_pi.sh
 
+    echo "Sync content to ${SD_CARD} ..."
+    sleep 3 && sync
+
     echo "Umount boot and rootfs"
-    umount rootfs/boot rootfs/secret
+    umount -l rootfs/boot rootfs/secret
     rm -r rootfs/secret
-    umount boot rootfs
+    umount -l boot rootfs
     rm -r boot rootfs
 }
 
