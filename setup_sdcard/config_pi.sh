@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NEW_USER=young
+NEW_USER=chaney
 
 echo "Remove alarm user"
 userdel -r alarm
@@ -57,6 +57,7 @@ pacman -S --noconfirm base-devel wget curl git man-db \
 clash proxychains sudo vim neovim rsync htop avahi nss-mdns docker prometheus-node-exporter
 
 # https://archlinuxarm.org/forum/viewtopic.php?f=65&t=15994#p69312
+pacman -R --noconfirm linux-aarch64 uboot-raspberrypi
 pacman -S --noconfirm linux-rpi
 
 echo "Set sudoers for $NEW_USER"

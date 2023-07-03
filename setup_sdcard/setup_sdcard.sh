@@ -8,7 +8,7 @@ set -e
 SD_CARD=$1
 INDEX=$2
 ROOTFS_TAR="ArchLinuxARM-rpi-aarch64-latest.tar.gz"
-MY_HOME="/home/young"
+MY_HOME="/home/chaney"
 PI_HOST_NAME="$(basename $MY_HOME)-pi$INDEX"
 
 # see https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
@@ -110,7 +110,7 @@ function chroot_setup() {
     # see https://wiki.archlinux.org/title/QEMU#Chrooting_into_arm/arm64_environment_from_x86_64
     # see https://nerdstuff.org/posts/2020/2020-003_simplest_way_to_create_an_arm_chroot/
 
-    # yay -S binfmt-qemu-static qemu-user-static arch-install-scripts
+    # yay -S qemu-user-static-binfmt qemu-user-static arch-install-scripts
     # systemctl restart systemd-binfmt.service
 
     echo "Chroot to ARM rootfs/"
